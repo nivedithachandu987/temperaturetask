@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Temperature </title>
+</head>
+<body>
+  <h1>Temperature Converter</h1>
+
+  <label for="temperature">Temperature:</label>
+
+  <input type="number" id="temperature" placeholder="Enter temperature" required>
+
+  <label for="from-unit">From:</label>
+
+  <select id="from-unit">
+
+    <option value="celsius">Celsius (°C)</option>
+
+    <option value="fahrenheit">Fahrenheit (°F)</option>
+  </select>
+
+  <label for="to-unit">To:</label>
+  <select id="to-unit">
+    <option value="celsius">Celsius (°C)</option>
+
+    <option value="fahrenheit">Fahrenheit (°F)</option>
+  </select>
+
+  <button onclick="convertTemperature()">Convert</button>
+
+  <p id="result"></p>
+
+  <script>
+    function convertTemperature() {
+      const temperature = parseFloat(document.getElementById("temperature").value);
+
+      const fromUnit = document.getElementById("from-unit").value;
+      const toUnit = document.getElementById("to-unit").value;
+
+      if (isNaN(temperature) || temperature === null) {
+
+        document.getElementById("result").textContent = "Please enter a valid temperature.";
+        return;
+
+
+      }
+
+      let convertedTemperature;
+
+      if (fromUnit === "celsius" && toUnit === "fahrenheit") {
+        convertedTemperature = (temperature * 9/5) + 32;
+      } else if (fromUnit === "fahrenheit" && toUnit === "celsius") {
+        convertedTemperature = (temperature - 32) * 5/9;
+      } else {
+        convertedTemperature = temperature;
+      }
+
+      {
+        let message;
+        if (toUnit === "celsius") {
+          message = `${temperature} °${fromUnit.toUpperCase()} = ${convertedTemperature.toFixed(2)} °C`;
+
+        } else {
+          message = `${temperature} °${fromUnit.toUpperCase()} = ${convertedTemperature.toFixed(2)} °F`;
+        }
+
+        document.getElementById("result").textContent = message;
+      }
+
+
+
+    }
+  </script>
+</body>
+</html>
